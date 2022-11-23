@@ -20,7 +20,7 @@ const Header = () => {
         </li>
         <li className='font-semibold'>
             <NavLink to={'/services'} >
-                Services
+                Login
             </NavLink>
         </li>
         {/* <li>
