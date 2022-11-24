@@ -4,6 +4,9 @@ import Sale from './Sale';
 const HotSale = () => {
 
 
+
+    
+
     const hotSales = [
         {
             id: 1,
