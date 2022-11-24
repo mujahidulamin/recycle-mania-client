@@ -1,5 +1,9 @@
 import React from 'react';
 
+
+
+
+//booking modal
 const BookingModal = ({ product }) => {
     
     return (
