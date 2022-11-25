@@ -14,6 +14,7 @@ const BookingModal = ({ product, setProduct }) => {
     const handleBooking = (event) => {
         event.preventDefault();
         const form = event.target;
+        const img = product.picture;
         const itemName = product?.itemName;
         const price = product?.resalePrice;
         const buyerName = form.name.value;
@@ -27,6 +28,7 @@ const BookingModal = ({ product, setProduct }) => {
             buyerEmail:buyerEmail,
             phone: phone,
             meetingLocation: meetingLocation,
+            img: img
         }
 
         fetch('http://localhost:5000/bookings', {
