@@ -26,16 +26,34 @@ const SignUp = () => {
                 toast.success('User Created Successfully')
                 //userUpdateProfile
                 updateUserProfile(data.name, data.photoURL)
-                .then(() => {
-                    navigate('/');
-                })
-                .catch(err => console.error(err))
+                    .then(() => {
+                        saveUSer(data.name, data.email, data.role);
+                    })
+                    .catch(err => console.error(err))
             })
             .catch(err => {
                 console.error(err)
                 setSignUpError(err.message)
             })
     }
+
+    const saveUSer = (name, email, role) => {
+        const user = { name, email, role }
+        fetch('http://localhost:5000/users', {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                navigate('/');
+            })
+    }
+
+
 
     return (
         <div className='h-[700px] flex justify-center items-center '>
@@ -88,7 +106,7 @@ const SignUp = () => {
 
                     <div className='mt-5 grid gap-2'>
                         <p>Select User Type</p>
-                        <select className=' p-3 bg-slate-300 rounded' {...register("userType")}>
+                        <select className=' p-3 bg-slate-300 rounded' {...register("role")}>
                             <option value="buyer">Buyer</option>
                             <option value="seller">Seller</option>
                         </select>
