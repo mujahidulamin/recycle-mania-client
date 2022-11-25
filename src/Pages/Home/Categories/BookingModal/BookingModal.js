@@ -31,9 +31,6 @@ const BookingModal = ({ product }) => {
                     </form>
                 </div>
             </div>
-
-
-
         </>
     );
 };

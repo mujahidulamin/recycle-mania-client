@@ -36,7 +36,6 @@ const Login = () => {
                                 })}
                             className="input input-bordered w-full " />
                         {errors.password && <p className='text-red-500' role="alert">{errors.password?.message}</p>}
-
                     </div>
                     <input className='btn btn-primary w-full my-5' value='Login' type="submit" />
                 </form>
