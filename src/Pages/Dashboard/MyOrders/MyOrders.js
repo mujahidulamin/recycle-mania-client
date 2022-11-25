@@ -13,7 +13,7 @@ const MyOrders = () => {
 
 
 
-    //use axios to get my orders data
+    //use axios to get my orders data and show to dashboard
     useEffect(() => {
         axios.get(`http://localhost:5000/bookings?email=${user?.email}`)
             .then(res => {
