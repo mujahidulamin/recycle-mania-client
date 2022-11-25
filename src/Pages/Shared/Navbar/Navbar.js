@@ -1,14 +1,20 @@
 
+import { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import logo from '../../../assets/logo.jpg'
+import { AuthContext } from './../../../context/AuthProvider';
 
 
 
 const Header = () => {
 
- 
+    const {user, logout} = useContext(AuthContext)
 
-    
+    const handleLogOUt = () => {
+        logout()
+        .then( () => {} )
+        .catch(err => console.error(err))
+    }
 
     const menuItems = <>
         <li className='font-semibold'>
@@ -18,18 +24,13 @@ const Header = () => {
                 Home
             </NavLink>
         </li>
-        <li className='font-semibold'>
-            <NavLink to={'/login'} >
-                Login
-            </NavLink>
-        </li>
-        {/* <li>
+        <li>
             {
                 user?.uid ?
                     <>
-                        <NavLink to={'/myReviews'} className='font-semibold'>My Reviews</NavLink>
-                        <NavLink to={'/addService'} className='font-semibold'>Add Service</NavLink>
-                        <button onClick={handleLogOut}
+                        <NavLink to={'/dashboard'} className='font-semibold'>Dashboard</NavLink>
+
+                        <button onClick= {handleLogOUt}
                             className='border-0 font-semibold'
                         >
                             Logout
@@ -40,19 +41,19 @@ const Header = () => {
                         <NavLink to={'/login'} className='font-semibold'>LogIn</NavLink>
                     </>
             }
-        </li> */}
+        </li>
         <li className='font-semibold'><NavLink to={'/blog'}>Blog</NavLink></li>
-        {/* <li>
+        <li>
             <div className="tooltip tooltip-bottom z-10" data-tip={user?.displayName}>
                 {
                     user?.photoURL ?
                         <img className='rounded-full' style={{ height: '40px' }} src={user?.photoURL} alt="" /> :
                         <div className="tooltip tooltip-bottom" data-tip="Profile">
-                            <FaUserAlt></FaUserAlt>
+                            
                         </div>
                 }
             </div>
-        </li> */}
+        </li>
     </>
 
 

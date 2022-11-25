@@ -39,12 +39,7 @@ const AuthProvider = ({ children }) => {
         })
     }
 
-    //   3. Email Verify
-    const verifyEmail = () => {
-        setLoading(true)
-        return sendEmailVerification(auth.currentUser)
-    }
-
+   
     // 4. Google Signin
     const signInWithGoogle = () => {
         setLoading(true)
@@ -54,12 +49,11 @@ const AuthProvider = ({ children }) => {
     // 5. Logout
     const logout = () => {
         setLoading(true)
-        localStorage.removeItem('airCncToken')
         return signOut(auth)
     }
 
     //6. Login with Password
-    const signin = (email, password) => {
+    const signIn = (email, password) => {
         setLoading(true)
         return signInWithEmailAndPassword(auth, email, password)
     }
@@ -87,10 +81,9 @@ const AuthProvider = ({ children }) => {
         user,
         createUser,
         updateUserProfile,
-        verifyEmail,
         signInWithGoogle,
         logout,
-        signin,
+        signIn,
         resetPassword,
         loading,
         setLoading,
