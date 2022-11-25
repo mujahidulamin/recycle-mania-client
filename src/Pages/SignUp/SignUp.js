@@ -1,19 +1,30 @@
 import React from 'react';
-import { useForm } from "react-hook-form";
+import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
-const Login = () => {
+const SignUp = () => {
+
     const { register, handleSubmit, formState: { errors } } = useForm();
 
-    const handleLogin = data => {
+    const handleSignUp = data => {
         console.log(data);
     }
 
     return (
-        <div className='h-[600px] flex justify-center items-center '>
+        <div className='h-[700px] flex justify-center items-center '>
             <div className='w-96 p-5 border'>
-                <h2 className='text-5xl font-semibold text-center'> Login</h2>
-                <form onSubmit={handleSubmit(handleLogin)}>
+                <h2 className='text-5xl font-semibold text-center'>Sign Up</h2>
+                <form onSubmit={handleSubmit(handleSignUp)}>
+                    <div className="form-control w-full ">
+                        <label className="label">
+                            <span className="label-text">Name</span>
+                        </label>
+                        <input type="text"
+                            {...register("name", { required: "Name is required" })}
+                            className="input input-bordered w-full " />
+                        {errors.name && <p className='text-red-500' role="alert">{errors.name?.message}</p>}
+
+                    </div>
                     <div className="form-control w-full ">
                         <label className="label">
                             <span className="label-text">Email</span>
@@ -38,14 +49,19 @@ const Login = () => {
                         {errors.password && <p className='text-red-500' role="alert">{errors.password?.message}</p>}
 
                     </div>
-                    <input className='btn btn-primary w-full my-5' value='Login' type="submit" />
+                    <div className='mt-5 grid gap-2'>
+                        <p>Select User Type</p>
+                        <select className=' p-3 bg-slate-300 rounded' {...register("userType")}>
+                            <option value="buyer">Buyer</option>
+                            <option value="seller">Seller</option>
+                        </select>
+                    </div>
+                    <input className='btn btn-primary w-full my-5' value='Sign Up' type="submit" />
                 </form>
-                <p className='text-center'>New to Recycle Mania? <Link to='/signup'><span className='text-primary font-semibold'>Create New Account</span></Link></p>
-                <div className="divider">OR</div>
-                <button className='btn w-full btn-outline btn-primary'>Continue With Google</button>
+                <p className='text-center'>Already have an account? <Link to='/login'><span className='text-primary font-semibold'>Login</span></Link></p>
             </div>
         </div>
     );
 };
 
-export default Login;
+export default SignUp;
