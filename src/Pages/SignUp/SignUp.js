@@ -1,13 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import { AuthContext } from './../../context/AuthProvider';
 
 const SignUp = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
 
+    const { createUser } = useContext(AuthContext)
+
+
     const handleSignUp = data => {
         console.log(data);
+        createUser(data.email, data.password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+            })
+            .catch(err => console.error(err))
     }
 
     return (
@@ -47,8 +57,19 @@ const SignUp = () => {
                                 })}
                             className="input input-bordered w-full " />
                         {errors.password && <p className='text-red-500' role="alert">{errors.password?.message}</p>}
-
                     </div>
+
+                    <div className="form-control w-full ">
+                        <label className="label">
+                            <span className="label-text">Photo URL</span>
+                        </label>
+                        <input type="text"
+                            {...register("photoURL")}
+                            className="input input-bordered w-full " />
+                        {errors.password && <p className='text-red-500' role="alert">{errors.password?.message}</p>}
+                    </div>
+
+
                     <div className='mt-5 grid gap-2'>
                         <p>Select User Type</p>
                         <select className=' p-3 bg-slate-300 rounded' {...register("userType")}>
