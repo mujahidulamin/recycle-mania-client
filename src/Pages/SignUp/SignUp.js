@@ -15,11 +15,13 @@ const SignUp = () => {
     const handleSignUp = data => {
         console.log(data);
         setSignUpError('')
+        //user created
         createUser(data.email, data.password)
             .then(result => {
                 const user = result.user;
                 console.log(user);
                 toast.success('User Created Successfully')
+                //userUpdateProfile
                 updateUserProfile(data.name, data.photoURL)
             })
             .catch(err => {
