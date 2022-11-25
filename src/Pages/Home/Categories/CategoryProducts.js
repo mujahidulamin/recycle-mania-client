@@ -6,7 +6,7 @@ import BookingModal from './BookingModal/BookingModal';
 
 
 const CategoryProducts = () => {
-  
+
     const [product, setProduct] = useState(null)
 
 
@@ -34,17 +34,20 @@ const CategoryProducts = () => {
                                 <p><span className='font-bold'>Seller: </span>{product.sellerName}</p>
                                 <div className="card-actions justify-center">
                                     <label
-                                    onClick={() => setProduct(product)}
-                                    htmlFor="my-modal" className="btn btn-primary">Book Now</label>
+                                        onClick={() => setProduct(product)}
+                                        htmlFor="my-modal" className="btn btn-primary">Book Now</label>
                                 </div>
                             </div>
                         </div>
                     </div>)
                 }
             </div>
-            <BookingModal
-                product = {product}
-            ></BookingModal>
+            {
+                product && <BookingModal
+                    product={product}
+                    setProduct = {setProduct}
+                ></BookingModal>
+            }
         </div>
     );
 };
