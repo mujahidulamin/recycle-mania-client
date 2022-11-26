@@ -29,7 +29,7 @@ const AllSellers = () => {
                             <th>Name</th>
                             <th>Email</th>
                             <th>Role</th>
-                            <th>ACtion</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
