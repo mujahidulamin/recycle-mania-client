@@ -1,5 +1,6 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { toast } from 'react-hot-toast';
 
 const AllBuyers = () => {
 
@@ -14,6 +15,23 @@ const AllBuyers = () => {
         }
     })
 
+    const handleMakeAdmin = id => {
+        fetch(`http://localhost:5000/buyers/admin/${id}`, {
+            method: "PUT",
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if(data.modifiedCount > 0){
+                    toast.success('Make Admin Successfully')
+                }
+            })
+    }
+
+
+
     return (
         <div>
             <h2 className='text-4xl font-bold mb-6'>All Buyers</h2>
@@ -24,7 +42,7 @@ const AllBuyers = () => {
                             <th></th>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Role</th>
+                            <th>ACtion</th>
                             <th>ACtion</th>
                         </tr>
                     </thead>
@@ -37,8 +55,9 @@ const AllBuyers = () => {
                                 <th>{i + 1}</th>
                                 <td>{buyer.name}</td>
                                 <td>{buyer.email}</td>
-                                <td>{buyer.role}</td>
-                                <td><button className='btn btn-primary'>Delete</button></td>
+                                <td>{
+                                    <button onClick={() => handleMakeAdmin(buyer._id)} className='btn  btn-primary'>Make Admin</button>}</td>
+                                <td><button className='btn btn-error'>Delete</button></td>
                             </tr>)
                         }
                     </tbody>
