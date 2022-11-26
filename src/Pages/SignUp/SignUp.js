@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from './../../context/AuthProvider';
 import toast from 'react-hot-toast'
+import useToken from './../../hooks/useToken';
+
 
 const SignUp = () => {
 
@@ -11,8 +13,14 @@ const SignUp = () => {
     const { createUser, updateUserProfile } = useContext(AuthContext)
 
     const [signUpError, setSignUpError] = useState('')
+const [createdUserEmail, setCreatedUserEmail] = useState('')
 
+    const [token] = useToken(createdUserEmail)
     const navigate = useNavigate();
+
+    if(token){
+        navigate('/')
+    }
 
 
     const handleSignUp = data => {
@@ -48,10 +56,14 @@ const SignUp = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
-                navigate('/');
+                setCreatedUserEmail(email)
+                
             })
     }
+
+
+    //jwt token get from server
+   
 
 
 

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from './../../../context/AuthProvider';
 import axios from "axios"
-import { async } from '@firebase/util';
+
 
 
 const MyOrders = () => {
@@ -15,7 +15,11 @@ const MyOrders = () => {
 
     //use axios to get my orders data and show to dashboard
     useEffect(() => {
-        axios.get(`http://localhost:5000/bookings?email=${user?.email}`)
+        axios.get(`http://localhost:5000/bookings?email=${user?.email}`, {
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
             .then(res => {
                 console.log(res.data);
                 setOrders(res.data)
