@@ -42,8 +42,8 @@ const AllBuyers = () => {
     }
 
 
-    const handleDelete = doctor => {
-        fetch(`http://localhost:5000/buyers/${doctor._id}`, {
+    const handleDelete = buyer => {
+        fetch(`http://localhost:5000/buyers/${buyer._id}`, {
             method: "DELETE",
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
