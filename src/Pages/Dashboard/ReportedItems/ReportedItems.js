@@ -1,23 +1,24 @@
 import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import ConfirmationModal from '../../Shared/ConfirmationModal/ConfirmationModal';
-import { toast } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
-const MyProducts = () => {
-    const [deletingProduct, setDeletingProduct] = useState(null)
+const ReportedItems = () => {
+    const [deletingReport, setDeletingReport] = useState(null)
 
 
     const closeModal = () => {
-        setDeletingProduct(null);
+        setDeletingReport(null);
     }
 
 
-    const { data: products, isLoading, refetch } = useQuery({
+
+    const { data: reports, isLoading, refetch } = useQuery({
         queryKey: ['products'],
         queryFn: async () => {
             try {
 
-                const res = await fetch('http://localhost:5000/products', {
+                const res = await fetch('http://localhost:5000/reports', {
                     headers: {
                         authorization: `bearer ${localStorage.getItem('accessToken')}`
                     }
@@ -32,9 +33,8 @@ const MyProducts = () => {
     })
 
 
-
     const handleDelete = product => {
-        fetch(`http://localhost:5000/products/${product._id}`, {
+        fetch(`http://localhost:5000/reports/${product._id}`, {
             method: "DELETE",
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -47,10 +47,14 @@ const MyProducts = () => {
                     refetch()
                     toast.success('Product Deleted Successfully')
                 }
-               
+
 
             })
     }
+
+
+
+
 
 
     if (isLoading) {
@@ -60,41 +64,38 @@ const MyProducts = () => {
 
     return (
         <div>
-            <h2 className='text-4xl font-bold mb-6'>My Products {products?.length}</h2>
+            <h2 className='text-4xl font-bold mb-6'>Reported Items {reports?.length}</h2>
 
             <div className="overflow-x-auto">
                 <table className="table w-full">
                     <thead>
                         <tr>
                             <th></th>
-                            <th>Product Image</th>
+                            <th>Item Picture</th>
                             <th>Item Name</th>
-                            <th>Resale Price</th>
-                            <th>Original Price</th>
-                            <th>Advertise</th>
+                            <th>Seller Name</th>
+                            <th>Reported By</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
-                            products?.map((product, i) => <tr
-                                key={product._id}
-
+                            reports?.map((report, i) => <tr
+                                key={report?._id}
                             >
                                 <th>{i + 1}</th>
                                 <td><div className="avatar">
                                     <div className="w-16 rounded-full">
-                                        <img alt='' src={product?.picture} />
+                                        <img alt='' src={report?.img} />
                                     </div>
                                 </div></td>
-                                <td>{product.itemName}</td>
-                                <td>{product.resalePrice}</td>
-                                <td>{product.originalPrice}</td>
-                                <td><button className='btn btn-primary'>Advertise</button></td>
+                                <td></td>
+                                <td>{report?.sellerName}</td>
+                                <td>{report?.reportedBy}</td>
                                 <td>
                                     <label
-                                        onClick={() => setDeletingProduct(product)}
-                                        htmlFor="confirmation-modal" className="btn btn-error">Delete</label>
+                                        onClick={() => setDeletingReport(report)}
+                                        htmlFor="confirmation-modal" className="btn btn-error">DELETE</label>
                                 </td>
                             </tr>)
                         }
@@ -103,14 +104,14 @@ const MyProducts = () => {
             </div>
 
             {
-                deletingProduct && <ConfirmationModal
-                    title={`Are you sure you want to delete?`}
-                    message={`If you delete user. It cannot be undone`}
-                    successAction={handleDelete}
-                    modalData={deletingProduct}
-                    closeModal={closeModal}
-                    deleteButtonName="DELETE"
-
+                deletingReport && <ConfirmationModal
+                title={`Are you sure you want to delete?`}
+                message={`If you delete user. It cannot be undone`}
+                successAction={handleDelete}
+                modalData={deletingReport}
+                closeModal={closeModal}
+                deleteButtonName="DELETE"
+                
                 ></ConfirmationModal>
             }
 
@@ -118,4 +119,4 @@ const MyProducts = () => {
     );
 };
 
-export default MyProducts;
+export default ReportedItems;

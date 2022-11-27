@@ -1,17 +1,54 @@
 
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useLoaderData } from 'react-router-dom'
 import BookingModal from './BookingModal/BookingModal';
+import { toast } from 'react-hot-toast';
+import { AuthContext } from './../../../context/AuthProvider';
 
 
 
 const CategoryProducts = () => {
 
+    const {user} = useContext(AuthContext)
     const [product, setProduct] = useState(null)
 
 
     const products = useLoaderData()
     console.log(products);
+
+    const handleReport = product => {
+        const reports = {
+            itemName: product.itemName,
+            resalePrice: product.resalePrice,
+            originalPrice:product.originalPrice,
+            location:product.location,
+            sellerName: product.sellerName,
+            img: product.picture,
+            reportedBy: user?.email
+        }
+
+        
+        fetch('http://localhost:5000/reports', {
+            method: "POST",
+            headers: {
+                'content-type' : 'application/json'
+            },
+            body: JSON.stringify(reports)
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            toast.success('Reported Successfully')
+        })
+        
+
+
+
+
+    }
+
+
+
 
     return (
         <div>
@@ -36,6 +73,9 @@ const CategoryProducts = () => {
                                     <label
                                         onClick={() => setProduct(product)}
                                         htmlFor="my-modal" className="btn btn-primary">Book Now</label>
+                                    <button
+                                        onClick={() => handleReport(product)}
+                                        className='btn btn-error'>Report To Admin</button>
                                 </div>
                             </div>
                         </div>
@@ -45,7 +85,7 @@ const CategoryProducts = () => {
             {
                 product && <BookingModal
                     product={product}
-                    setProduct = {setProduct}
+                    setProduct={setProduct}
                 ></BookingModal>
             }
         </div>
