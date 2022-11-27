@@ -42,7 +42,7 @@ const AllSellers = () => {
                                 <td>{seller.name}</td>
                                 <td>{seller.email}</td>
                                 <td>{seller.role}</td>
-                                <td><button className='btn btn-primary'>Delete</button></td>
+                                <td><button className='btn btn-error'>Delete</button></td>
                             </tr>)
                         }
                     </tbody>
