@@ -15,6 +15,7 @@ import AdminRoute from '../AdminRoute/AdminRoute';
 import AddProduct from './../../Pages/Dashboard/Dashboard/AddProduct/AddProduct';
 import MyProducts from '../../Pages/Dashboard/MyProducts/MyProducts';
 import ReportedItems from './../../Pages/Dashboard/ReportedItems/ReportedItems';
+import Payment from '../../Pages/Dashboard/Payment/Payment';
 
 
 
@@ -81,6 +82,11 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/myProduct',
                 element: <MyProducts></MyProducts>
+            },
+            {
+                path: '/dashboard/payment/:id',
+                element: <Payment></Payment>,
+                loader: ({params}) => fetch(`http://localhost:5000/bookings/${params.id}`)
             },
         ]
     }

@@ -4,11 +4,12 @@ import { Link, useLocation } from 'react-router-dom';
 import { AuthContext } from './../../context/AuthProvider';
 import { useNavigate } from 'react-router-dom';
 import useToken from './../../hooks/useToken';
+import { GoogleAuthProvider } from 'firebase/auth';
 
 const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
 
-    const { signIn } = useContext(AuthContext)
+    const { signIn, signInWithGoogle } = useContext(AuthContext)
     const [loginError, setLoginError] = useState('')
 
     const [logUserEmail, setLoginUserEmail] = useState('')
@@ -43,6 +44,40 @@ const Login = () => {
                 setLoginError(err.message)
             })
     }
+
+    const googleProvider = new GoogleAuthProvider()
+
+    const handleGoogleSignIn = () => {
+        signInWithGoogle(googleProvider)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                const buyer = "buyer"
+                saveUSer(user.displayName, user.email, buyer)
+            })
+            .catch(err => console.error(err))
+    }
+
+    const saveUSer = (name, email, role) => {
+        const user = { name, email, role}
+        fetch('http://localhost:5000/users', {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                setLoginUserEmail(email)
+                
+            })
+    }
+    
+
+
+
+
 
     return (
         <div className='h-[600px] flex justify-center items-center '>
@@ -81,7 +116,7 @@ const Login = () => {
                 </form>
                 <p className='text-center'>New to Recycle Mania? <Link to='/signup'><span className='text-primary font-semibold'>Create New Account</span></Link></p>
                 <div className="divider">OR</div>
-                <button className='btn w-full btn-outline btn-primary'>Continue With Google</button>
+                <button onClick={handleGoogleSignIn} className='btn w-full btn-outline btn-primary'>Continue With Google</button>
             </div>
         </div>
     );

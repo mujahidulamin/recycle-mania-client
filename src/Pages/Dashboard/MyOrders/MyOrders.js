@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from './../../../context/AuthProvider';
 import axios from "axios"
+import { Link } from 'react-router-dom';
 
 
 
@@ -71,9 +72,19 @@ const MyOrders = () => {
                                         <br />
                                     </td>
                                     <td>{order?.buyerEmail}</td>
-                                    <th>
-                                        <button className="btn btn-primary">Pay</button>
-                                    </th>
+                                    <td>
+
+                                        {
+                                            order.price && !order.paid && <Link to={`/dashboard/payment/${order._id}`}>
+                                                <button className="btn btn-primary">Pay</button>
+                                            </Link>
+                                        }
+
+                                        {
+                                            order.price && order.paid && <button className='btn btn-accent'>Paid</button>
+                                        }
+
+                                    </td>
                                 </tr>)
                         }
 

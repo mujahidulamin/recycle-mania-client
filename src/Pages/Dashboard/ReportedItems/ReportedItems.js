@@ -89,7 +89,7 @@ const ReportedItems = () => {
                                         <img alt='' src={report?.img} />
                                     </div>
                                 </div></td>
-                                <td></td>
+                                <td>{report?.itemName}</td>
                                 <td>{report?.sellerName}</td>
                                 <td>{report?.reportedBy}</td>
                                 <td>
