@@ -53,7 +53,7 @@ const CategoryProducts = () => {
 
     return (
         <div>
-            <h2>Category Products</h2>
+            <h2 className='text-4xl font-bold my-6'>Category Products</h2>
 
 
             {

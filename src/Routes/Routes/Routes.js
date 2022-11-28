@@ -16,6 +16,7 @@ import AddProduct from './../../Pages/Dashboard/Dashboard/AddProduct/AddProduct'
 import MyProducts from '../../Pages/Dashboard/MyProducts/MyProducts';
 import ReportedItems from './../../Pages/Dashboard/ReportedItems/ReportedItems';
 import Payment from '../../Pages/Dashboard/Payment/Payment';
+import SellerRoute from '../SellerRoute/SellerRoute';
 
 
 
@@ -77,11 +78,11 @@ const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/addProduct',
-                element: <AddProduct></AddProduct>
+                element: <SellerRoute><AddProduct></AddProduct></SellerRoute>
             },
             {
                 path: '/dashboard/myProduct',
-                element: <MyProducts></MyProducts>
+                element: <SellerRoute><MyProducts></MyProducts></SellerRoute>
             },
             {
                 path: '/dashboard/payment/:id',

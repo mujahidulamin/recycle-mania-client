@@ -45,7 +45,7 @@ const ReportedItems = () => {
                 console.log(data);
                 if (data.deletedCount > 0) {
                     refetch()
-                    toast.success('Product Deleted Successfully')
+                    toast.success('Reported Item Deleted Successfully')
                 }
 
 

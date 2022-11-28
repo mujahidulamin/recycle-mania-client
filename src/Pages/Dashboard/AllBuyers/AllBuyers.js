@@ -37,6 +37,7 @@ const AllBuyers = () => {
             .then(data => {
                 if (data.modifiedCount > 0) {
                     toast.success('Make Admin Successfully')
+                    refetch()
                 }
             })
     }

@@ -58,7 +58,7 @@ const Navbar = () => {
 
 
     return (
-        <div className='bg-white  text-black'>
+        <div className='bg-white sticky top-0 z-50  text-black'>
             <div className="navbar container mx-auto">
                 <div className="flex-1 ">
                     <div className="dropdown">
