@@ -1,14 +1,15 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { Link, useLocation } from 'react-router-dom';
 import { AuthContext } from './../../context/AuthProvider';
 import { useNavigate } from 'react-router-dom';
 import useToken from './../../hooks/useToken';
 import { GoogleAuthProvider } from 'firebase/auth';
+import { ClipLoader } from 'react-spinners';
 
 const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-
+    const [loading, setLoading] = useState(true)
     const { signIn, signInWithGoogle } = useContext(AuthContext)
     const [loginError, setLoginError] = useState('')
 
@@ -75,13 +76,28 @@ const Login = () => {
     }
     
 
+    useEffect(() => {
+        setLoading(true)
+        setTimeout(() => {
+            setLoading(false)
+        }, 800)
+    }, [])
 
 
 
 
     return (
         <div className='h-[600px] flex justify-center items-center '>
-            <div className='w-96 p-5 border'>
+            {
+                loading ?
+                <ClipLoader
+                color={'#32A8B3'}
+                loading={loading}
+                size={50}
+                
+                ></ClipLoader>
+                :
+                <div className='w-96 p-5 border'>
                 <h2 className='text-5xl font-semibold text-center'> Login</h2>
                 <form onSubmit={handleSubmit(handleLogin)}>
                     <div className="form-control w-full ">
@@ -118,6 +134,7 @@ const Login = () => {
                 <div className="divider">OR</div>
                 <button onClick={handleGoogleSignIn} className='btn w-full btn-outline btn-primary'>Continue With Google</button>
             </div>
+            }
         </div>
     );
 };

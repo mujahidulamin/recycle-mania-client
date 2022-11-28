@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import logo from '../../../assets/logo.jpg'
 import { AuthContext } from './../../../context/AuthProvider';
-
+import { FaUserAlt } from "react-icons/fa";
 
 
 const Navbar = () => {
@@ -49,7 +49,7 @@ const Navbar = () => {
                     user?.photoURL ?
                         <img className='rounded-full' style={{ height: '40px' }} src={user?.photoURL} alt="" /> :
                         <div className="tooltip tooltip-bottom" data-tip="Profile">
-                            
+                               <FaUserAlt></FaUserAlt>
                         </div>
                 }
             </div>
