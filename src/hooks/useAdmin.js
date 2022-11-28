@@ -11,7 +11,7 @@ const useAdmin = email => {
 
     useEffect(() => {
         if (email) {
-            fetch(`http://localhost:5000/buyers/admin/${email}`)
+            fetch(`https://recycle-mania-server.vercel.app/buyers/admin/${email}`)
                 .then(res => res.json())
                 .then(data => {
                     console.log(data);

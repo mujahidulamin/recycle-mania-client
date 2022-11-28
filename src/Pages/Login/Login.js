@@ -60,8 +60,8 @@ const Login = () => {
     }
 
     const saveUSer = (name, email, role) => {
-        const user = { name, email, role}
-        fetch('http://localhost:5000/users', {
+        const user = { name, email, role }
+        fetch('https://recycle-mania-server.vercel.app/users', {
             method: "POST",
             headers: {
                 'content-type': 'application/json'
@@ -71,10 +71,10 @@ const Login = () => {
             .then(res => res.json())
             .then(data => {
                 setLoginUserEmail(email)
-                
+
             })
     }
-    
+
 
     useEffect(() => {
         setLoading(true)
@@ -90,50 +90,50 @@ const Login = () => {
         <div className='h-[600px] flex justify-center items-center '>
             {
                 loading ?
-                <ClipLoader
-                color={'#32A8B3'}
-                loading={loading}
-                size={50}
-                
-                ></ClipLoader>
-                :
-                <div className='w-96 p-5 border'>
-                <h2 className='text-5xl font-semibold text-center'> Login</h2>
-                <form onSubmit={handleSubmit(handleLogin)}>
-                    <div className="form-control w-full ">
-                        <label className="label">
-                            <span className="label-text">Email</span>
-                        </label>
-                        <input type="email"
-                            {...register("email", { required: "Email is required" })}
-                            className="input input-bordered w-full " />
-                        {errors.email && <p className='text-red-500' role="alert">{errors.email?.message}</p>}
+                    <ClipLoader
+                        color={'#32A8B3'}
+                        loading={loading}
+                        size={50}
 
+                    ></ClipLoader>
+                    :
+                    <div className='w-96 p-5 border'>
+                        <h2 className='text-5xl font-semibold text-center'> Login</h2>
+                        <form onSubmit={handleSubmit(handleLogin)}>
+                            <div className="form-control w-full ">
+                                <label className="label">
+                                    <span className="label-text">Email</span>
+                                </label>
+                                <input type="email"
+                                    {...register("email", { required: "Email is required" })}
+                                    className="input input-bordered w-full " />
+                                {errors.email && <p className='text-red-500' role="alert">{errors.email?.message}</p>}
+
+                            </div>
+                            <div className="form-control w-full ">
+                                <label className="label">
+                                    <span className="label-text">Password</span>
+                                </label>
+                                <input type="password"
+                                    {...register("password",
+                                        {
+                                            required: 'Password is required',
+                                            minLength: { value: 6, message: 'password must be atleast 6 digit' }
+                                        })}
+                                    className="input input-bordered w-full " />
+                                {errors.password && <p className='text-red-500' role="alert">{errors.password?.message}</p>}
+                            </div>
+                            <input className='btn btn-primary w-full my-5' value='Login' type="submit" />
+
+                            {
+                                loginError && <p className='text-red-500'>{loginError}</p>
+                            }
+
+                        </form>
+                        <p className='text-center'>New to Recycle Mania? <Link to='/signup'><span className='text-primary font-semibold'>Create New Account</span></Link></p>
+                        <div className="divider">OR</div>
+                        <button onClick={handleGoogleSignIn} className='btn w-full btn-outline btn-primary'>Continue With Google</button>
                     </div>
-                    <div className="form-control w-full ">
-                        <label className="label">
-                            <span className="label-text">Password</span>
-                        </label>
-                        <input type="password"
-                            {...register("password",
-                                {
-                                    required: 'Password is required',
-                                    minLength: { value: 6, message: 'password must be atleast 6 digit' }
-                                })}
-                            className="input input-bordered w-full " />
-                        {errors.password && <p className='text-red-500' role="alert">{errors.password?.message}</p>}
-                    </div>
-                    <input className='btn btn-primary w-full my-5' value='Login' type="submit" />
-
-                    {
-                        loginError && <p className='text-red-500'>{loginError}</p>
-                    }
-
-                </form>
-                <p className='text-center'>New to Recycle Mania? <Link to='/signup'><span className='text-primary font-semibold'>Create New Account</span></Link></p>
-                <div className="divider">OR</div>
-                <button onClick={handleGoogleSignIn} className='btn w-full btn-outline btn-primary'>Continue With Google</button>
-            </div>
             }
         </div>
     );

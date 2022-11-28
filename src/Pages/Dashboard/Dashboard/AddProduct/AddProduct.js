@@ -29,7 +29,7 @@ const AddProduct = () => {
                 if (imgData.success) {
                     console.log(imgData.data.url);
                     const product = {
-                        id:data.category,
+                        id: data.category,
                         email: user.email,
                         itemName: data.productName,
                         picture: imgData.data.url,
@@ -44,23 +44,23 @@ const AddProduct = () => {
                     }
 
                     //save product information to the database
-                    fetch('http://localhost:5000/products', {
+                    fetch('https://recycle-mania-server.vercel.app/products', {
                         method: "POST",
                         headers: {
-                        'content-type': 'application/json',
+                            'content-type': 'application/json',
                             authorization: `bearer ${localStorage.getItem('accessToken')}`
                         },
                         body: JSON.stringify(product)
                     })
-                    .then(res => res.json())
-                    .then(result => {
-                        console.log(result);
-                        toast.success('Added Product Successfully')
-                        navigate('/dashboard/myProduct')
-                    })
+                        .then(res => res.json())
+                        .then(result => {
+                            console.log(result);
+                            toast.success('Added Product Successfully')
+                            navigate('/dashboard/myProduct')
+                        })
                 }
             })
-        }
+    }
 
 
 

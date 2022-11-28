@@ -17,7 +17,7 @@ const MyProducts = () => {
         queryFn: async () => {
             try {
 
-                const res = await fetch('http://localhost:5000/products', {
+                const res = await fetch('https://recycle-mania-server.vercel.app/products', {
                     headers: {
                         authorization: `bearer ${localStorage.getItem('accessToken')}`
                     }
@@ -34,7 +34,7 @@ const MyProducts = () => {
 
 
     const handleDelete = product => {
-        fetch(`http://localhost:5000/products/${product._id}`, {
+        fetch(`https://recycle-mania-server.vercel.app/products/${product._id}`, {
             method: "DELETE",
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -47,27 +47,27 @@ const MyProducts = () => {
                     refetch()
                     toast.success('Product Deleted Successfully')
                 }
-               
+
 
             })
     }
 
 
-    const date =  new Date().toLocaleDateString()
+    const date = new Date().toLocaleDateString()
 
-        const handleAdvertise = (product) => {
-            const advertise = {
-                itemName: product.itemName,
-                resalePrice: product.resalePrice,
-                originalPrice: product.originalPrice,
-                location: product.location,
-                sellerName: product.sellerName,
-                img: product.picture,
-                yearsOfUse: product.yearsOfUse,
-                time: date,
-            }
+    const handleAdvertise = (product) => {
+        const advertise = {
+            itemName: product.itemName,
+            resalePrice: product.resalePrice,
+            originalPrice: product.originalPrice,
+            location: product.location,
+            sellerName: product.sellerName,
+            img: product.picture,
+            yearsOfUse: product.yearsOfUse,
+            time: date,
+        }
 
-            fetch('http://localhost:5000/advertise', {
+        fetch('https://recycle-mania-server.vercel.app/advertise', {
             method: "POST",
             headers: {
                 'content-type': 'application/json'
@@ -81,8 +81,8 @@ const MyProducts = () => {
             })
 
 
-            
-        }
+
+    }
 
     if (isLoading) {
         return <p>Loading...</p>
@@ -122,8 +122,8 @@ const MyProducts = () => {
                                 <td>{product.originalPrice}</td>
                                 <td>
                                     <button
-                                    onClick={() => handleAdvertise(product)}
-                                    className='btn btn-primary'>Available</button></td>
+                                        onClick={() => handleAdvertise(product)}
+                                        className='btn btn-primary'>Available</button></td>
                                 <td>
                                     <label
                                         onClick={() => setDeletingProduct(product)}

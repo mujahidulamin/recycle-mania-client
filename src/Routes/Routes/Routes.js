@@ -51,7 +51,7 @@ const router = createBrowserRouter([
             {
                 path: '/category/:id',
                 element: <CategoryProducts></CategoryProducts>,
-                loader: ({ params }) => fetch(`http://localhost:5000/category/${params.id}`)
+                loader: ({ params }) => fetch(`https://recycle-mania-server.vercel.app/category/${params.id}`)
             },
         ]
     },
@@ -61,7 +61,7 @@ const router = createBrowserRouter([
         element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
         children: [
             {
-                path: '/dashboard',
+                path: '/dashboard/myOrders',
                 element: <MyOrders></MyOrders>
             },
             {
@@ -87,7 +87,7 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/payment/:id',
                 element: <Payment></Payment>,
-                loader: ({params}) => fetch(`http://localhost:5000/bookings/${params.id}`)
+                loader: ({ params }) => fetch(`https://recycle-mania-server.vercel.app/bookings/${params.id}`)
             },
         ]
     }

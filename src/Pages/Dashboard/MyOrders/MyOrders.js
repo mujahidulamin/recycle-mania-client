@@ -16,7 +16,7 @@ const MyOrders = () => {
 
     //use axios to get my orders data and show to dashboard
     useEffect(() => {
-        axios.get(`http://localhost:5000/bookings?email=${user?.email}`, {
+        axios.get(`https://recycle-mania-server.vercel.app/bookings?email=${user?.email}`, {
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
             }

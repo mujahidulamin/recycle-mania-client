@@ -8,7 +8,7 @@ const Categories = () => {
     //load categories data with useQuery
     const { data: datas = [] } = useQuery({
         queryKey: ['datas'],
-        queryFn: () => fetch('http://localhost:5000/categories')
+        queryFn: () => fetch('https://recycle-mania-server.vercel.app/categories')
             .then(res => res.json())
     })
 

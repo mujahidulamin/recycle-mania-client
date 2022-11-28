@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
 import ConfirmationModal from '../../Shared/ConfirmationModal/ConfirmationModal';
+import { ClipLoader } from 'react-spinners';
 
 const AllBuyers = () => {
 
     const [deletingBuyer, setDeletingBuyer] = useState(null)
-
+    const [loading, setLoading] = useState(true)
 
     const closeModal = () => {
         setDeletingBuyer(null);
@@ -20,14 +21,14 @@ const AllBuyers = () => {
     const { data: buyers = [], refetch } = useQuery({
         queryKey: ['buyers'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/buyers?role=${buyer}`)
+            const res = await fetch(`https://recycle-mania-server.vercel.app/buyers?role=${buyer}`)
             const data = await res.json()
             return data;
         }
     })
 
     const handleMakeAdmin = id => {
-        fetch(`http://localhost:5000/buyers/admin/${id}`, {
+        fetch(`https://recycle-mania-server.vercel.app/buyers/admin/${id}`, {
             method: "PUT",
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -44,7 +45,7 @@ const AllBuyers = () => {
 
 
     const handleDelete = buyer => {
-        fetch(`http://localhost:5000/buyers/${buyer._id}`, {
+        fetch(`https://recycle-mania-server.vercel.app/buyers/${buyer._id}`, {
             method: "DELETE",
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -61,6 +62,12 @@ const AllBuyers = () => {
     }
 
 
+    useEffect(() => {
+        setLoading(true)
+        setTimeout(() => {
+            setLoading(false)
+        }, 800)
+    }, [])
 
 
 
@@ -70,7 +77,19 @@ const AllBuyers = () => {
     return (
         <div>
             <h2 className='text-4xl font-bold mb-6'>All Buyers</h2>
-            <div className="overflow-x-auto">
+
+            {
+                loading ?
+                    <ClipLoader
+
+                        color={'#32A8B3'}
+                        loading={loading}
+                        size={50}
+                    >
+                    </ClipLoader>
+
+                    :
+<div className="overflow-x-auto">
                 <table className="table w-full">
                     <thead>
                         <tr>
@@ -103,6 +122,12 @@ const AllBuyers = () => {
                     </tbody>
                 </table>
             </div>
+                    
+            
+            }
+
+
+            
 
             {
                 deletingBuyer && <ConfirmationModal

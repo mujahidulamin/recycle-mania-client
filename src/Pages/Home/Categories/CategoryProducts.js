@@ -1,6 +1,6 @@
 
 import { useState, useContext, useEffect } from 'react';
-import { useLoaderData } from 'react-router-dom'
+import { Link, useLoaderData } from 'react-router-dom'
 import BookingModal from './BookingModal/BookingModal';
 import { toast } from 'react-hot-toast';
 import { AuthContext } from './../../../context/AuthProvider';
@@ -29,7 +29,7 @@ const CategoryProducts = () => {
         }
 
 
-        fetch('http://localhost:5000/reports', {
+        fetch('https://recycle-mania-server.vercel.app/reports', {
             method: "POST",
             headers: {
                 'content-type': 'application/json'
@@ -59,11 +59,11 @@ const CategoryProducts = () => {
             {
                 loading ?
                     <ClipLoader
-                    color={'#32A8B3'}
+                        color={'#32A8B3'}
                         loading={loading}
                         size={50}
                     >
-                        
+
                     </ClipLoader>
 
                     :
@@ -84,12 +84,23 @@ const CategoryProducts = () => {
                                         <p> <span className='font-bold'>Posted:</span> {product.time}</p>
                                         <p><span className='font-bold'>Seller: </span>{product.sellerName}</p>
                                         <div className="card-actions justify-center">
-                                            <label
-                                                onClick={() => setProduct(product)}
-                                                htmlFor="my-modal" className="btn btn-primary">Book Now</label>
-                                            <button
-                                                onClick={() => handleReport(product)}
-                                                className='btn btn-error'>Report To Admin</button>
+
+                                            {
+                                                user?.uid ?
+                                                    <>
+                                                        <label
+                                                            onClick={() => setProduct(product)}
+                                                            htmlFor="my-modal" className="btn btn-primary">Book Now</label>
+                                                        <button
+                                                            onClick={() => handleReport(product)}
+                                                            className='btn btn-error'>Report To Admin</button>
+                                                    </>
+                                                    :
+
+                                                    <Link to={'/login' }>
+                                                    <button className='btn btn-primary'>Please Login First to Book</button>
+                                                    </Link>
+                                            }
                                         </div>
                                     </div>
                                 </div>
