@@ -53,10 +53,40 @@ const MyProducts = () => {
     }
 
 
+    const date =  new Date().toLocaleDateString()
+
+        const handleAdvertise = (product) => {
+            const advertise = {
+                itemName: product.itemName,
+                resalePrice: product.resalePrice,
+                originalPrice: product.originalPrice,
+                location: product.location,
+                sellerName: product.sellerName,
+                img: product.picture,
+                yearsOfUse: product.yearsOfUse,
+                time: date,
+            }
+
+            fetch('http://localhost:5000/advertise', {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(advertise)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                toast.success('Advertised Successfully')
+            })
+
+
+            
+        }
+
     if (isLoading) {
         return <p>Loading...</p>
     }
-
 
     return (
         <div>
@@ -90,7 +120,10 @@ const MyProducts = () => {
                                 <td>{product.itemName}</td>
                                 <td>{product.resalePrice}</td>
                                 <td>{product.originalPrice}</td>
-                                <td><button className='btn btn-primary'>Advertise</button></td>
+                                <td>
+                                    <button
+                                    onClick={() => handleAdvertise(product)}
+                                    className='btn btn-primary'>Available</button></td>
                                 <td>
                                     <label
                                         onClick={() => setDeletingProduct(product)}
