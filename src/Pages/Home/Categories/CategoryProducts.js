@@ -73,7 +73,9 @@ const CategoryProducts = () => {
                             products.map(product => <div
                                 key={product._id}
                             >
-                                <div className="card w-full bg-base-100 shadow-xl">
+                                <div data-aos="flip-left"
+     data-aos-easing="ease-out-cubic"
+     data-aos-duration="2000"  className="card w-full bg-base-100 shadow-xl">
                                     <figure><img className='w-96 h-96' src={product.picture} alt="Shoes" /></figure>
                                     <div className="card-body justify-center">
                                         <h2 className="font-bold text-xl">Band Name: {product.itemName}</h2>

@@ -41,7 +41,8 @@ const Categories = () => {
                                 data={data}
                             >
 
-                                <div className="card w-full bg-base-100 shadow-xl">
+                                <div data-aos="fade-up"
+                                    data-aos-duration="3000" className="card w-full bg-base-100 shadow-xl drop-shadow-xl">
                                     <figure><img className='w-96 h-96' src={data.img} alt="Shoes" /></figure>
                                     <div className="card-body">
                                         <p className='font-bold text-center'>{data.categoryName}</p>
