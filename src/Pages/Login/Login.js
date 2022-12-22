@@ -87,7 +87,9 @@ const Login = () => {
 
 
     return (
-        <div className='h-[600px] flex justify-center items-center '>
+        <div data-aos="fade-down"
+        data-aos-easing="linear"
+        data-aos-duration="1500" className='h-[600px] flex justify-center items-center '>
             {
                 loading ?
                     <ClipLoader
