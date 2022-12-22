@@ -25,7 +25,9 @@ const Categories = () => {
     return (
 
         <div className='container mx-auto '>
-            <h2 className='text-4xl font-bold my-12'>Our Categories</h2>
+            <h2 data-aos="fade-down"
+     data-aos-easing="linear"
+     data-aos-duration="1500" className='text-4xl font-bold my-12'>Our Categories</h2>
             {
                 loading ?
                     <ClipLoader
@@ -42,7 +44,7 @@ const Categories = () => {
                             >
 
                                 <div data-aos="fade-up"
-                                    data-aos-duration="3000" className="card w-full bg-base-100 shadow-xl drop-shadow-xl">
+                                    data-aos-duration="3000" className="card w-full bg-base-100 shadow-xl drop-shadow-2xl">
                                     <figure><img className='w-96 h-96' src={data.img} alt="Shoes" /></figure>
                                     <div className="card-body">
                                         <p className='font-bold text-center'>{data.categoryName}</p>

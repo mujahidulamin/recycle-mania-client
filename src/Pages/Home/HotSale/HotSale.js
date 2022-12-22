@@ -37,8 +37,12 @@ const HotSale = () => {
 
     return (
         <div className='container mx-auto '>
-            <h2 className='text-4xl font-bold my-12'>Hot Sale</h2>
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mx-8 lg:mx-0'>
+            <h2 data-aos="fade-right"
+     data-aos-offset="300"
+     data-aos-easing="ease-in-sine" className='text-4xl font-bold my-12'>Hot Sale</h2>
+            <div data-aos="fade-down"
+     data-aos-easing="linear"
+     data-aos-duration="1500" className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mx-8 lg:mx-0'>
                 {
                     hotSales.map(sale => <Sale
                         key={sale.id}

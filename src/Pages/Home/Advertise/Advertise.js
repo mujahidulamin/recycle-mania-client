@@ -31,14 +31,18 @@ const Advertise = () => {
 
     return (
         <div className='container mx-auto'>
-            <h2 className='text-4xl font-bold my-12'>Advertise</h2>
+            <h2 data-aos="fade-down"
+     data-aos-easing="linear"
+     data-aos-duration="1500" className='text-4xl font-bold my-12'>Advertise</h2>
 
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mx-8 lg:mx-0'>
 
                 {
                     advertises?.map(advertise =>
 
-                        <div className="card w-full bg-base-100 shadow-xl">
+                        <div data-aos="fade-right"
+                        data-aos-offset="300"
+                        data-aos-easing="ease-in-sine" className="card w-full bg-base-100 shadow-xl drop-shadow-2xl">
                             <figure><img className='w-96 h-96' src={advertise.img} alt="advertise product" /></figure>
                             <div className="card-body justify-center">
                                 <h2 className="font-bold text-xl">Band Name:{advertise.itemName} </h2>

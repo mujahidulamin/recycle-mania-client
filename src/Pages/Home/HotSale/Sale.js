@@ -3,7 +3,7 @@ import React from 'react';
 const Sale = ({sale}) => {
     return (
         <div>
-            <div className="card w-full bg-base-100 shadow-xl">
+            <div className="card w-full bg-base-100 shadow-xl drop-shadow-2xl">
                 <figure><img src= {sale.img} alt="Shoes" /></figure>
                 <div className="card-body">
                     <h2 className="card-title mx-auto">
